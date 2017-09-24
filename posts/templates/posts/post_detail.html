@@ -1,0 +1,15 @@
+{% extends "posts/base.html" %}
+
+{% block head_title %}{{ title }} | {{ block.super }}{% endblock head_title %}
+
+
+{% block content %}
+<div class="col-sm-6 col-sm-offset-3">
+    {% if instance.image %}
+    <img src="{{ instance.image.url }}" class="img-responsive" />
+    {% endif %}
+
+    <h1>{{ title }} <small>{{ instance.stamptime }}</small></h1><hr>
+    {{ instance.content|linebreaks|truncatewords:120 }}<br/>
+</div>
+{% endblock content %}
