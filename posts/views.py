@@ -1,3 +1,4 @@
+from urllib.parse import quote
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, redirect
@@ -21,9 +22,11 @@ def post_create(request): #create post
 
 def post_detail(request, slug ): #retrieve post
     instance = get_object_or_404(Post, slug=slug )
+    quote_tag = quote(instance.content)
     context  = {
         'title':instance.title,
-        'instance':instance
+        'instance':instance,
+        "quote_tag":quote_tag,
     }
     return render(request,'posts/post_detail.html', context)
 
@@ -49,8 +52,8 @@ def post_list(request): #list all post
     }
     return render(request, 'posts\post_list.html', context)
 
-def post_update(request, id): #edit post
-    instance = get_object_or_404(Post, id=id )
+def post_update(request, slug=None ): #edit post
+    instance = get_object_or_404(Post, slug=slug )
     form     = PostForm(request.POST or None,request.FILES or None , instance=instance)
     if form.is_valid():
         instance = form.save(commit=False)
@@ -65,8 +68,8 @@ def post_update(request, id): #edit post
     return render(request, 'posts/post_form.html', context)
 
 
-def post_delete(request, id): #delete post
-    instance = get_object_or_404(Post, id=id)
+def post_delete(request, slug): #delete post
+    instance = get_object_or_404(Post, slug=slug)
     instance.delete()
     messages.success(request, "succesfully deleted")
     return redirect("posts:post_list")
