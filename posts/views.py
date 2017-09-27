@@ -1,16 +1,21 @@
 from urllib.parse import quote
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, redirect
-
+from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, redirect, Http404
 
 from . models import Post
 from . forms import PostForm
+
+
 # Create your views here.
 def post_create(request): #create post
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
+
     form = PostForm(request.POST or None, request.FILES or None )
     if form.is_valid():
         instance = form.save(commit=False)
+        instance.user  = request.user
         instance.save()
         messages.success(request, "post successfully created")
         return HttpResponseRedirect(instance.get_absolute_url())
@@ -31,6 +36,9 @@ def post_detail(request, slug ): #retrieve post
     return render(request,'posts/post_detail.html', context)
 
 def post_list(request): #list all post
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
+
     instance_list = Post.objects.all()
     paginator = Paginator(instance_list, 10, orphans=5)
     page_request_var = "page"
@@ -52,7 +60,10 @@ def post_list(request): #list all post
     }
     return render(request, 'posts\post_list.html', context)
 
+
 def post_update(request, slug=None ): #edit post
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
     instance = get_object_or_404(Post, slug=slug )
     form     = PostForm(request.POST or None,request.FILES or None , instance=instance)
     if form.is_valid():
@@ -69,6 +80,8 @@ def post_update(request, slug=None ): #edit post
 
 
 def post_delete(request, slug): #delete post
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
     instance = get_object_or_404(Post, slug=slug)
     instance.delete()
     messages.success(request, "succesfully deleted")

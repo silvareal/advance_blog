@@ -10,18 +10,22 @@
     {% if instance.image %}
     <img src="{{ instance.image.url }}" class="img-responsive" />
     {% endif %}
-{{ quote_tag }}
+    
     <h1>{{ title }} <small>{{ instance.stamptime }}</small></h1><hr>
-    {{ instance.content|truncate:5|urlify }}
+    {% if instance.user.get_full_name %}
+    <p><strong>Author:</strong>{{ instance.user.get_full_name }}</p>
+    {% endif %}
     {{ instance.content|linebreaks|truncatewords:120 }}<br/>
+
+    <div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div><br/>
     <a href="http://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">facebook</a>/
-    <a href="https://twitter.com/home?status={{ quote_tag }}%20{{ request.build_absolute_uri }}">Twitter</a>/
+    <a href="https://twitter.com/home?status={{ instance.content|truncate:5|urlify }}%20{{ request.build_absolute_uri }}">Twitter</a>/
     <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}/&title={{ instance.title }}&summary={{ quote_tag }}&source={{ request.build_absolute_uri }}/">Linkedin</a>/
     <a href="https://plus.google.com/share?url={{ request.build_absolute_uri }}">google+</a>/
     <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}/&title={{ instance.title }}">Reddit</a>
 
 
 
-
+<div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div>
 </div>
 {% endblock content %}
