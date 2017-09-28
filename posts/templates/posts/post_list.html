@@ -2,7 +2,12 @@
 
 {% block content %}
 <div class="col-sm-6 col-sm-offset-3">
-    <h1>{{ title }}</h1>  
+    <h1>{{ title }}</h1>
+    <form method="GET" action="">
+        <input type="text" placeholder="search posts" name="q" value="{{ request.GET.q }}" />
+        <input type="submit" value="search" />
+    </form>
+    </form>
         {% for obj in instance %}
             <div class="row"> 
             <div class="col-sm-12 ">
@@ -13,6 +18,8 @@
                 <!--<img src="..." alt="...">-->
                 <div class="caption">
                     <h3><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> <small>{{ obj.stamptime|timesince }} ago</small></h3>
+                    <h3>{%if obj.draft %}staff only:<span style="color:red">Draft</span>{% endif %}</h3>
+                     <h3>{% if obj.published > today %}staff only:<span style="color:green">future posts{% endif %}</span></h3>
                     {% if obj.user.get_full_name %}
                     <p><strong>Author:</strong>{{ obj.user.get_full_name }}</p>
                     {% endif %}
@@ -27,7 +34,7 @@
 <div class="pagination">
     <span class="step-links">
         {% if instance.has_previous %}
-            <a href="?{{ page_request_var }}={{ instance.previous_page_number }}">previous</a>
+            <a href="?{{ page_request_var }}={{ instance.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
         {% endif %}
 
         <span class="current">
@@ -35,7 +42,7 @@
         </span>
 
         {% if instance.has_next %}
-            <a href="?{{ page_request_var }}={{ instance.next_page_number }}">next</a>
+            <a href="?{{ page_request_var }}={{ instance.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
         {% endif %}
     </span>
 </div>
