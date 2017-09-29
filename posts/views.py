@@ -36,8 +36,6 @@ def post_detail(request, slug ): #retrieve post
     return render(request,'posts/post_detail.html', context)
 
 def post_list(request): #list all post
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
 
     instance_list = Post.objects.all()
     paginator = Paginator(instance_list, 10, orphans=5)
