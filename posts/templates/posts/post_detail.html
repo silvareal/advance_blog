@@ -16,7 +16,7 @@
     {% if instance.user.get_full_name %}
     <p><strong>Author:</strong>{{ instance.user.get_full_name }}</p>
     {% endif %}
-    {{ instance.content|linebreaks|safe }}<br/>
+    {{ instance.content|safe }}<br/>
 
     <div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div><br/>
     <a href="http://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">facebook</a>/
