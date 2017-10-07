@@ -66,7 +66,7 @@ def post_list(request): #list all post
 
     context  = {
         'instance':instance,
-        'title': 'List',
+        'title': 'Latest post',
         'page_request_var':page_request_var
     }
     return render(request, 'posts\post_list.html', context)
