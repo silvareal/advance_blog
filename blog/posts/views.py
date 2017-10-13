@@ -51,8 +51,9 @@ def post_list(request): #list all post
             Q(content__icontains=query)|
             Q(user__first_name__icontains=query)|
             Q(user__last_name__icontains=query)).distinct()
+    
     page_request_var = "page"        
-    paginator = Paginator(instance_list,5, orphans=3)
+    paginator = Paginator(instance_list, 5, orphans=3)
 
     page = request.GET.get(page_request_var)
     try:

@@ -1,6 +1,12 @@
-h1 {
-    color: 777;
+
+.a:-webkit-any-link {
+    color:#000;
+    text-decoration: none;
 }
-
-
+.a:hover {
+    color: blue;
+}
+.a:active {
+    color:purple;
+}
 

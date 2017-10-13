@@ -1,12 +1,11 @@
 {% extends 'posts/base.html' %}
 
 {% block content %}
-<div class="container">
+
 <h1 class="text-center">{{ title }}</h1> 
 
    
         {% for obj in instance %}
-    
                 <!--<div class="thumbnail">
                         {% if obj.image %}
                         <img src="{{ obj.image.url }}" class="img-responsive" />
@@ -27,6 +26,7 @@
                     </div>
                 </div>
          </div>
+            
             {% endfor %}
 
 
@@ -37,19 +37,22 @@
  
 
         {% if instance.has_previous %}
-            <li class="<--previous"> <a href="?{{ page_request_var }}={{ instance.previous_page_number }}{% if instance.GET.get.q %}{{ request.GEt.q }}{% endif %}">previous</a></li>
+            <li class="previous"> <a href="?{{ page_request_var }}={{ instance.previous_page_number }}{% if instance.GET.get.q %}{{ request.GEt.q }}{% endif %}">previous</a></li>
         {% endif %}
 
         <span class="current">
-            <strong>Page {{ instance.number }} of {{ instance.paginator.num_pages }}</strong>
+            {% if instance.next_page_number > 1 %}<strong>Page {{ instance.number }} of {{ instance.paginator.num_pages }}</strong>{% endif %}
         </span>
 
         {% if instance.has_next %}
-            <li class="next-->"><a href="?{{ page_request_var }}={{ instance.next_page_number }}{% if instance.GET.get.q %}{{ request.GEt.q }}{% endif %}">next</a></li>
+            <li class="next"><a href="?{{ page_request_var }}={{ instance.next_page_number }}{% if instance.GET.get.q %}{{ request.GEt.q }}{% endif %}">next</a></li>
         {% endif %}
         
     </span>
     </ul>
+</div>
+
+</div>
 </div>
 {% endif %}
 

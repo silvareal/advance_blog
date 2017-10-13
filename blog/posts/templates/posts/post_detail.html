@@ -16,9 +16,9 @@
     <p class="text-center">{% if instance.draft %}<span style="color:red">Draft</span>{% endif %}</p>
 
     {% if instance.image %}
-    <img style="margin-bottom: 50px" src="{{ instance.image.url }}" class="img-responsive" />
+    <img style="margin-bottom: 50px; margin: 0 auto; center;" src="{{ instance.image.url }}" class="img-responsive" />
     {% endif %}
-    {{ instance.content|safe }}<br/>
+    <p class="content-markdown" style="font-style: Century Gothic, sans-serif; margin-top: 20px; margin-left: 20px; margin-right: 20px">{{ instance.content|safe }}</p><br/>
 <hr>
     <div class="fb-like"  data-width="100%" data-href="{{ request.build_absolute_uri }}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div><br/>
     <a href="http://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">facebook</a>/
