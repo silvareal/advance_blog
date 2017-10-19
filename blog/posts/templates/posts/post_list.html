@@ -4,7 +4,7 @@
 
 <h1 class="text-center">{{ title }}</h1> 
 
-   
+   {% if not instance.GET.get.q %}{{ request.GEt.q }}{% endif %}
         {% for obj in instance %}
                 <!--<div class="thumbnail">
                         {% if obj.image %}
@@ -31,7 +31,7 @@
 
 
 {% if  instance.paginator %}
-<div class="pagination text-center ken" style="margin-left: 50px">
+<div class="pagination text-center" style="margin-left: 50px">
            <ul class="pager">
     <span class="pager">
  
