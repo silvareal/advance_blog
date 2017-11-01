@@ -23,7 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY =os.environ.get('DJANGO_SECRET_KEY','#^=zlrb0p!*5inoubvd9+kdwp2s#fqgea(fso98r#rqtw!2zgs')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
+ADMINS = (('silva', 'sylvernusakubo@yahoo.com'),)
 
 ALLOWED_HOSTS = ['silvablog.herokuapp.com','127.0.0.1']
 
