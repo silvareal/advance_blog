@@ -25,7 +25,7 @@ SECRET_KEY =os.environ.get('DJANGO_SECRET_KEY','#^=zlrb0p!*5inoubvd9+kdwp2s#fqge
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['silvablog.herokuapp.com/','127.0.0.1']
+ALLOWED_HOSTS = ['silvablog.herokuapp.com','127.0.0.1']
 
 
 # Application definition
