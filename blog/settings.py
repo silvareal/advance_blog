@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY =os.environ.get('DJANGO_SECRET_KEY','#^=zlrb0p!*5inoubvd9+kdwp2s#fqgea(fso98r#rqtw!2zgs')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['silvablog.herokuapp.com','127.0.0.1']
 
@@ -58,10 +58,12 @@ MIDDLEWARE_CLASSES = [
 
 ROOT_URLCONF = 'blog.urls'
 
+PROJECT_DIR = os.path.dirname(__file__)
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "templates")],
+        'DIRS': [os.path.join(PROJECT_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
