@@ -59,7 +59,7 @@ MIDDLEWARE_CLASSES = [
 
 ROOT_URLCONF = 'blog.urls'
 
-PROJECT_DIR = os.path.dirname(__file__)
+PROJECT_DIR =os.path.dirname(os.path.abspath(__file__))
 
 TEMPLATES = [
     {
