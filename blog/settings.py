@@ -136,7 +136,7 @@ STATICFILES_DIRS = [
    PROJECT_DIR.child("static")
 ]
 
-STATIC_ROOT = PROJECT_DIR.child(PROJECT_DIR.child'staticfiles')
+STATIC_ROOT = PROJECT_DIR.child('staticfiles')
 
 
 
