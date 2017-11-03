@@ -97,4 +97,4 @@ def post_delete(request, slug): #delete post
     instance = get_object_or_404(Post, slug=slug)
     instance.delete()
     messages.success(request, "succesfully deleted")
-    return redirect("posts:post_list")
+    return redirect("posts/post_list")
